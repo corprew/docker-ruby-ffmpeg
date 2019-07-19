@@ -2,7 +2,7 @@
 
 This is the base for https://hub.docker.com/r/corprew/spackle-base/.
 
-It adds rubyto https://hub.docker.com/r/corprew/ffmpeg-nonfree-docker/.
+It adds ruby to https://hub.docker.com/r/corprew/ffmpeg-nonfree-docker/.
 
 It is useful as a base for images that use ruby to participate in media processing frameworks.
 

@@ -15,14 +15,15 @@ RUN set -eux; \
         ca-certificates curl \
         libffi8 libgdbm6t64 libgmp10 libreadline8t64 libssl3t64 libyaml-0-2 zlib1g; \
     buildDeps=' \
-        autoconf bison build-essential dpkg-dev libffi-dev libgdbm-dev libgmp-dev \
+        autoconf bison build-essential dpkg-dev libarchive-tools libffi-dev libgdbm-dev libgmp-dev \
         libreadline-dev libssl-dev libyaml-dev rustc zlib1g-dev \
     '; \
     apt-get install -y --no-install-recommends $buildDeps; \
     curl -fsSL -o ruby.tar.gz "https://cache.ruby-lang.org/pub/ruby/${RUBY_VERSION%.*}/ruby-${RUBY_VERSION}.tar.gz"; \
     echo "${RUBY_DOWNLOAD_SHA256} *ruby.tar.gz" | sha256sum --check --strict; \
     mkdir -p /usr/src/ruby; \
-    tar -xzf ruby.tar.gz -C /usr/src/ruby --strip-components=1; \
+    # bsdtar rather than GNU tar, which fails under amd64 emulation on arm64 hosts
+    bsdtar -xzf ruby.tar.gz -C /usr/src/ruby --strip-components=1; \
     rm ruby.tar.gz; \
     cd /usr/src/ruby; \
     ./configure \

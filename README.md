@@ -2,7 +2,9 @@
 
 This is the base for https://hub.docker.com/r/corprew/spackle-base/.
 
-It adds ruby to https://hub.docker.com/r/corprew/ffmpeg-nonfree-docker/.
+It adds ruby to https://hub.docker.com/r/corprew/ffmpeg-nonfree-docker/ (the `26.04` tag, Ubuntu 26.04 LTS).
+
+Ruby is built from source (currently 4.0.7, with bundler and YJIT) because Ubuntu's packaged ruby lags behind. To bump it, update `RUBY_VERSION` and `RUBY_DOWNLOAD_SHA256` in the Dockerfile from https://www.ruby-lang.org/en/downloads/. Gems install into `/usr/local/bundle`. Build tools aren't kept in the image, so gems with native extensions need `build-essential` installed first.
 
 It is useful as a base for images that use ruby to participate in media processing frameworks.
 

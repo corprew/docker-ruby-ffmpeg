@@ -12,10 +12,10 @@ RUN set -eux; \
     dpkg-query -W -f '${Package}\n' | xargs apt-mark manual > /dev/null; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
-        ca-certificates curl \
+        build-essential ca-certificates curl pkg-config \
         libffi8 libgdbm6t64 libgmp10 libreadline8t64 libssl3t64 libyaml-0-2 zlib1g; \
     buildDeps=' \
-        autoconf bison build-essential dpkg-dev libarchive-tools libffi-dev libgdbm-dev libgmp-dev \
+        autoconf bison libarchive-tools libffi-dev libgdbm-dev libgmp-dev \
         libreadline-dev libssl-dev libyaml-dev rustc zlib1g-dev \
     '; \
     apt-get install -y --no-install-recommends $buildDeps; \
